@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tüm Kitaplar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tables.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+
+<body>
+<div class="container my-2">
+    <div class="container my-2">
+        <h2 ><img th:src="@{/css/src/kitapresmi.png}"/> Kitaplarım <img th:src="@{/css/src/kitapresmi.png}"/> </h2>
+        <p class="my-5">
+            <a href="/new" class="btn btn-primary">
+                <i class="fas fa-user-plus ml-2"> Yeni Kitap Ekle </i></a>
+            <img th:src="@{/css/src/kitapresmi.png}"/>
+        </p>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#Kitap No</th>
+                <th scope="col">Kitap İsmi</th>
+                <th scope="col">Yazar</th>
+                <th scope="col">Çıkış Yılı</th>
+                <th>Düzenle</th>
+                <th>Sil</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="books : ${allBooks}">
+                <td th:text="${books.id}"></td>
+                <td th:text="${books.bookName}"></td>
+                <td th:text="${books.author}"></td>
+                <td th:text="${books.releaseYear}"></td>
+                <td>
+                    <a th:href="@{'/edit/' + ${books.id}}" class="btn btn-primary">
+                        <i class="fas fa-user-edit ml-2"></i>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'/delete/' + ${books.id}}" class="btn btn-primary"
+                       onclick="if (!(confirm('Silmek istediğinize emin misiniz?'))) return false">
+                        <i class="fas fa-user-times ml-2"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+
+</html>
